@@ -1,4 +1,4 @@
-module github.com/BatteredBunny/youtube_scraper
+module github.com/0x090909/youtube_scraper
 
 go 1.21
 
@@ -12,5 +12,8 @@ require (
 require (
 	github.com/andybalholm/cascadia v1.3.2 // indirect
 	github.com/goccy/go-json v0.10.2 // indirect
+	github.com/tidwall/gjson v1.17.1 // indirect
+	github.com/tidwall/match v1.1.1 // indirect
+	github.com/tidwall/pretty v1.2.0 // indirect
 	golang.org/x/net v0.19.0 // indirect
 )
