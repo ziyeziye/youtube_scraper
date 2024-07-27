@@ -21,7 +21,7 @@ package main
 
 import (
 	"encoding/json"
-	"github.com/BatteredBunny/youtube_scraper"
+	"github.com/0x090909/youtube_scraper"
 	"log"
 )
 
