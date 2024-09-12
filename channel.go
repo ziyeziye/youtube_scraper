@@ -291,7 +291,7 @@ type channelContinueOutput struct {
 
 type channelShortsInitialOutput struct {
 	Channel                 channelInitialAccount `rjson:"."`
-	Videos                  []shortRenderer       `rjson:"contents.twoColumnBrowseResultsRenderer.tabs[2].tabRenderer.content.richGridRenderer.contents[].richItemRenderer.content.reelItemRenderer"`
+	Videos                  []shortRenderer       `rjson:"contents.twoColumnBrowseResultsRenderer.tabs[2].tabRenderer.content.richGridRenderer.contents[].richItemRenderer.content.shortsLockupViewModel.onTap.innertubeCommand.reelWatchEndpoint"`
 	VideosContinuationToken string                `rjson:"contents.twoColumnBrowseResultsRenderer.tabs[2].tabRenderer.content.richGridRenderer.contents[-].continuationItemRenderer.continuationEndpoint.continuationCommand.token"`
 }
 
