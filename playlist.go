@@ -30,7 +30,7 @@ func NewPlaylistScraper(playlistId string) (p PlaylistScraper, err error) {
 
 	q := rawUrl.Query()
 	q.Set("list", playlistId)
-	q.Set("hl", "en")
+	q.Set("hl", HLCode)
 	rawUrl.RawQuery = q.Encode()
 
 	p.url = rawUrl.String()

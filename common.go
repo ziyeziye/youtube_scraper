@@ -10,6 +10,8 @@ import (
 	"github.com/PuerkitoBio/goquery"
 )
 
+var HLCode = "en"
+
 func ExtractInitialDataBytes(body []byte) (rawJson string, err error) {
 	var doc *goquery.Document
 	doc, err = goquery.NewDocumentFromReader(bytes.NewReader(body))
@@ -44,7 +46,7 @@ func ExtractInitialData(url string) (rawJson string, err error) {
 }
 
 func (ci ContinueInput) FillGenericInfo() ContinueInput {
-	ci.Context.Client.Hl = "en"
+	ci.Context.Client.Hl = HLCode
 	ci.Context.Client.Gl = "GB"
 	ci.Context.Client.ClientName = "WEB"
 	ci.Context.Client.ClientVersion = "2.20230714.00.00"

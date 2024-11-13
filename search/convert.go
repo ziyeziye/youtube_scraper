@@ -5,7 +5,7 @@ import (
 	"strconv"
 	"strings"
 
-	scraper "github.com/BatteredBunny/youtube_scraper"
+	scraper "github.com/0x090909/youtube_scraper"
 	"github.com/dustin/go-humanize"
 )
 

@@ -2,9 +2,9 @@ module examples
 
 go 1.21
 
-replace github.com/BatteredBunny/youtube_scraper => ../
+replace github.com/0x090909/youtube_scraper => ../
 
-require github.com/BatteredBunny/youtube_scraper v0.0.0-00010101000000-000000000000
+require github.com/0x090909/youtube_scraper v0.0.0-00010101000000-000000000000
 
 require (
 	github.com/BatteredBunny/rjson v0.1.18 // indirect

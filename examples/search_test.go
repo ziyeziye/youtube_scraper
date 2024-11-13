@@ -5,7 +5,7 @@ import (
 	"log"
 	"testing"
 
-	search "github.com/BatteredBunny/youtube_scraper/search"
+	search "github.com/0x090909/youtube_scraper/search"
 )
 
 func TestSearch(t *testing.T) {

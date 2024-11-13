@@ -3,8 +3,8 @@ package examples
 import (
 	"testing"
 
-	scraper "github.com/BatteredBunny/youtube_scraper"
-	"github.com/BatteredBunny/youtube_scraper/video"
+	scraper "github.com/0x090909/youtube_scraper"
+	"github.com/0x090909/youtube_scraper/video"
 )
 
 func TestVideoCommentNewestScraper(t *testing.T) {

@@ -2,18 +2,23 @@ package main
 
 import (
 	"encoding/json"
-	scraper "github.com/BatteredBunny/youtube_scraper"
+	scraper "github.com/0x090909/youtube_scraper"
+	video2 "github.com/0x090909/youtube_scraper/video"
 	"log"
 )
 
 func main() {
-	c, _ := scraper.NewChannelScraper("@BitcoinMagazine")
+	//scraper.HLCode = "zh-CN"
+	c, err := scraper.NewChannelScraper("@cnliziqi")
+	if err != nil {
+		log.Fatal("NewChannelScraper ", err)
+	}
 
 	var printedChannel bool
 	for {
-		videos, err := c.NextShortsPage()
+		videos, err := c.NextVideosPage()
 		if err != nil {
-			log.Fatal(err)
+			log.Fatal("NextVideosPage ", err)
 		} else if len(videos) == 0 {
 			break
 		}
@@ -22,7 +27,7 @@ func main() {
 			if available, channel := c.GetChannelInfo(); available {
 				bs, err := json.MarshalIndent(channel, "", "	")
 				if err != nil {
-					log.Fatal(err)
+					log.Fatal("json.MarshalIndent ", err)
 				}
 				log.Println(string(bs))
 			}
@@ -31,7 +36,13 @@ func main() {
 		}
 
 		for _, video := range videos {
-			log.Println(video.VideoID, video.Title, video.Views)
+			info, err := video2.NewVideoWatchInfo(video.VideoID)
+			if err != nil {
+				log.Fatal("NewVideoWatchInfo ", err)
+				return
+			}
+			log.Println(info.VideoID, info.Title, info.ViewCount, info.Thumbnail, info.UploadDate)
+			//log.Println(video.VideoID, video.Title, video.Views)
 		}
 	}
 }

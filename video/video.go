@@ -12,8 +12,8 @@ import (
 	"strings"
 	"time"
 
+	scraper "github.com/0x090909/youtube_scraper"
 	"github.com/BatteredBunny/rjson"
-	scraper "github.com/BatteredBunny/youtube_scraper"
 	"github.com/dustin/go-humanize"
 )
 
@@ -71,7 +71,7 @@ func NewVideoScraper(id string) (v VideoScraper, err error) {
 
 	q := rawUrl.Query()
 	q.Set("v", id)
-	q.Set("hl", "en")
+	q.Set("hl", scraper.HLCode)
 	rawUrl.RawQuery = q.Encode()
 	v.url = rawUrl.String()
 

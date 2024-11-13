@@ -3,7 +3,6 @@ package scraper
 import (
 	"bytes"
 	"errors"
-	"fmt"
 	"io"
 	"log"
 	"net/http"
@@ -161,7 +160,7 @@ func NewChannelScraper(id string) (c ChannelScraper, err error) {
 
 	rawShortsUrl := rawUrl.JoinPath("shorts")
 	q := rawShortsUrl.Query()
-	q.Set("hl", "en")
+	q.Set("hl", HLCode)
 	rawShortsUrl.RawQuery = q.Encode()
 	c.shortsUrl = rawShortsUrl.String()
 
@@ -171,7 +170,7 @@ func NewChannelScraper(id string) (c ChannelScraper, err error) {
 
 	rawStreamsUrl := rawUrl.JoinPath("streams")
 	q = rawStreamsUrl.Query()
-	q.Set("hl", "en")
+	q.Set("hl", HLCode)
 	rawStreamsUrl.RawQuery = q.Encode()
 	c.streamsUrl = rawStreamsUrl.String()
 
@@ -663,7 +662,6 @@ func (c *ChannelScraper) NextStreamsPage() (videos []Video, err error) {
 					return
 				}
 
-				fmt.Println(rawToken)
 				rawToken = output.ContinueToken
 				rawVideos = output.Videos
 

@@ -1,6 +1,8 @@
 package video
 
-import scraper "github.com/BatteredBunny/youtube_scraper"
+import (
+	scraper "github.com/0x090909/youtube_scraper"
+)
 
 // youtube json commentRenderer type
 type commentRenderer struct {

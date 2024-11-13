@@ -8,8 +8,8 @@ import (
 	"net/http"
 	"net/url"
 
+	scraper "github.com/0x090909/youtube_scraper"
 	"github.com/BatteredBunny/rjson"
-	scraper "github.com/BatteredBunny/youtube_scraper"
 )
 
 type SearchEntryType = int
@@ -85,7 +85,7 @@ func NewSearchScraper(query string, filter string) (s SearchScraper, err error) 
 
 	q := rawUrl.Query()
 	q.Set("search_query", query)
-	q.Set("hl", "en")
+	q.Set("hl", scraper.HLCode)
 	if filter != "" {
 		q.Set("sp", filter)
 	}
