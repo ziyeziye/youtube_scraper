@@ -14,7 +14,7 @@ import (
 	"strings"
 )
 
-type videoWatchInfoOutput struct {
+type VideoWatchInfoOutput struct {
 	VideoID           string   `rjson:"videoDetails.videoId"`
 	ChannelID         string   `rjson:"videoDetails.channelId"`
 	ChannelTitle      string   `rjson:"videoDetails.author"`
@@ -37,7 +37,7 @@ type videoWatchInfoOutput struct {
 }
 
 type VideoInfo struct {
-	videoWatchInfoOutput
+	VideoWatchInfoOutput
 	PublishDate string
 	UploadDate  string
 	Thumbnail   string
@@ -55,7 +55,7 @@ func NewVideoWatchInfo(id string) (info VideoInfo, err error) {
 	}
 	//scraper.DebugFileOutput([]byte(rawJson), "video_watch_initial.json")
 
-	var output videoWatchInfoOutput
+	var output VideoWatchInfoOutput
 	if err = rjson.Unmarshal([]byte(rawJson), &output); err != nil {
 		if errors.Is(err, rjson.ErrCantFindField) {
 			if scraper.Debug {
@@ -72,7 +72,7 @@ func NewVideoWatchInfo(id string) (info VideoInfo, err error) {
 	}
 
 	info = VideoInfo{
-		videoWatchInfoOutput: output,
+		VideoWatchInfoOutput: output,
 		PublishDate:          carbon.Parse(output.publishDate).ToDateString(),
 		UploadDate:           carbon.Parse(output.uploadDate).ToDateString(),
 		Thumbnail:            thumbnail,
@@ -123,23 +123,13 @@ func getPlayerResponse(body []byte) (rawJson string, err error) {
 	return
 }
 
-func GetThumbnails() {
+func GetThumbnails(id string) map[string]string {
+	return map[string]string{
+		"default":  "https://img.youtube.com/vi/" + id + "/default.jpg",
+		"medium":   "https://img.youtube.com/vi/" + id + "/mqdefault.jpg",
+		"high":     "https://img.youtube.com/vi/" + id + "/hqdefault.jpg",
+		"standard": "https://img.youtube.com/vi/" + id + "/sddefault.jpg",
+		"maxres":   "https://img.youtube.com/vi/" + id + "/maxresdefault.jpg",
+	}
 
 }
-
-//public function getThumbnails(string $videoId): array
-//{
-//$videoId = Utils::extractVideoId($videoId);
-//
-//if ($videoId) {
-//return [
-//'default' => "https://img.youtube.com/vi/{$videoId}/default.jpg",
-//'medium' => "https://img.youtube.com/vi/{$videoId}/mqdefault.jpg",
-//'high' => "https://img.youtube.com/vi/{$videoId}/hqdefault.jpg",
-//'standard' => "https://img.youtube.com/vi/{$videoId}/sddefault.jpg",
-//'maxres' => "https://img.youtube.com/vi/{$videoId}/maxresdefault.jpg",
-//];
-//}
-//
-//return [];
-//}
