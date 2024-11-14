@@ -14,33 +14,28 @@ import (
 	"strings"
 )
 
-type VideoWatchInfoOutput struct {
-	VideoID           string   `rjson:"videoDetails.videoId"`
-	ChannelID         string   `rjson:"videoDetails.channelId"`
-	ChannelTitle      string   `rjson:"videoDetails.author"`
-	Title             string   `rjson:"videoDetails.title"`
-	Description       string   `rjson:"videoDetails.shortDescription"`
-	publishDate       string   `rjson:"microformat.playerMicroformatRenderer.publishDate"`
-	uploadDate        string   `rjson:"microformat.playerMicroformatRenderer.uploadDate"`
+type VideoInfo struct {
+	VideoID           string `rjson:"videoDetails.videoId"`
+	ChannelID         string `rjson:"videoDetails.channelId"`
+	ChannelTitle      string `rjson:"videoDetails.author"`
+	Title             string `rjson:"videoDetails.title"`
+	Description       string `rjson:"videoDetails.shortDescription"`
+	PublishDate       string
+	UploadDate        string
+	PublishDateStr    string   `rjson:"microformat.playerMicroformatRenderer.publishDate"`
+	UploadDateStr     string   `rjson:"microformat.playerMicroformatRenderer.uploadDate"`
 	Category          string   `rjson:"microformat.playerMicroformatRenderer.category"`
 	ViewCount         int      `rjson:"videoDetails.viewCount"`
 	VideoDuration     int      `rjson:"videoDetails.lengthSeconds"`
 	Keywords          []string `rjson:"videoDetails.keywords"`
 	RegionsAllowed    []string `rjson:"microformat.playerMicroformatRenderer.availableCountries"`
-	thumbnail         string   `rjson:"microformat.playerMicroformatRenderer.thumbnail.thumbnails[0].url"`
+	Thumbnail         string   `rjson:"microformat.playerMicroformatRenderer.thumbnail.thumbnails[0].url"`
 	IsLive            bool     `rjson:"videoDetails.isLiveContent"`
-	IsOwnerViewing    bool     `rjson:"microformat.playerMicroformatRenderer.isOwnerViewing"`
+	IsOwnerViewing    bool     `rjson:"videoDetails.isOwnerViewing"`
 	IsCrawlable       bool     `rjson:"videoDetails.isCrawlable"`
 	AllowRatings      bool     `rjson:"videoDetails.allowRatings"`
 	IsPrivate         bool     `rjson:"videoDetails.isPrivate"`
 	IsUnpluggedCorpus bool     `rjson:"videoDetails.isUnpluggedCorpus"`
-}
-
-type VideoInfo struct {
-	VideoWatchInfoOutput
-	PublishDate string
-	UploadDate  string
-	Thumbnail   string
 }
 
 func NewVideoWatchInfo(id string) (info VideoInfo, err error) {
@@ -53,10 +48,10 @@ func NewVideoWatchInfo(id string) (info VideoInfo, err error) {
 	if err != nil {
 		return
 	}
-	//scraper.DebugFileOutput([]byte(rawJson), "video_watch_initial.json")
+	scraper.DebugFileOutput([]byte(rawJson), "video_watch_initial.json")
 
-	var output VideoWatchInfoOutput
-	if err = rjson.Unmarshal([]byte(rawJson), &output); err != nil {
+	rjson.Debug = true
+	if err = rjson.Unmarshal([]byte(rawJson), &info); err != nil {
 		if errors.Is(err, rjson.ErrCantFindField) {
 			if scraper.Debug {
 				log.Println("WARNING:", err)
@@ -66,17 +61,13 @@ func NewVideoWatchInfo(id string) (info VideoInfo, err error) {
 		return
 	}
 
-	thumbnail := output.thumbnail
-	if thumbnail == "" {
-		thumbnail = "https://i.ytimg.com/vi/" + output.VideoID + "/maxresdefault.jpg"
+	if info.Thumbnail == "" {
+		info.Thumbnail = "https://i.ytimg.com/vi/" + info.VideoID + "/maxresdefault.jpg"
 	}
 
-	info = VideoInfo{
-		VideoWatchInfoOutput: output,
-		PublishDate:          carbon.Parse(output.publishDate).ToDateString(),
-		UploadDate:           carbon.Parse(output.uploadDate).ToDateString(),
-		Thumbnail:            thumbnail,
-	}
+	info.PublishDate = carbon.Parse(info.PublishDateStr).ToDateString()
+	info.UploadDate = carbon.Parse(info.UploadDateStr).ToDateString()
+
 	return
 }
 

@@ -321,7 +321,7 @@ func genericChannelShortsInitial(input *ContinueInput, initialComplete *bool, ur
 	subscribers, unit, err := humanize.ParseSI(FixUnit(strings.TrimSuffix(rawChannel.Subscribers, " subscribers")))
 	if err != nil {
 		return
-	} else if unit != "" {
+	} else if unit != "" && Debug {
 		log.Printf("WARNING: possibly wrong number for channel subscribers count: %f%s\n", subscribers, unit)
 	}
 
@@ -332,7 +332,7 @@ func genericChannelShortsInitial(input *ContinueInput, initialComplete *bool, ur
 		videosAmount, unit, err = humanize.ParseSI(FixUnit(strings.TrimSuffix(rawChannel.RawVideosAmount, " videos")))
 		if err != nil {
 			return
-		} else if unit != "" {
+		} else if unit != "" && Debug {
 			log.Printf("WARNING: possibly wrong number for channel videos amount: %f%s\n", videosAmount, unit)
 		}
 	}
@@ -432,7 +432,7 @@ func genericChannelInitial(input *ContinueInput, initialComplete *bool, url stri
 	subscribers, unit, err := humanize.ParseSI(FixUnit(strings.TrimSuffix(rawChannel.Subscribers, " subscribers")))
 	if err != nil {
 		return
-	} else if unit != "" {
+	} else if unit != "" && Debug {
 		log.Printf("WARNING: possibly wrong number for channel subscribers count: %f%s\n", subscribers, unit)
 	}
 
@@ -443,7 +443,7 @@ func genericChannelInitial(input *ContinueInput, initialComplete *bool, url stri
 		videosAmount, unit, err = humanize.ParseSI(FixUnit(strings.TrimSuffix(rawChannel.RawVideosAmount, " videos")))
 		if err != nil {
 			return
-		} else if unit != "" {
+		} else if unit != "" && Debug {
 			log.Printf("WARNING: possibly wrong number for channel videos amount: %f%s\n", videosAmount, unit)
 		}
 	}

@@ -185,7 +185,7 @@ func NewVideoScraper(id string) (v VideoScraper, err error) {
 	likes, unit, err := humanize.ParseSI(scraper.FixUnit(output.Likes))
 	if err != nil {
 		return
-	} else if unit != "" {
+	} else if unit != "" && scraper.Debug {
 		log.Printf("WARNING: possibly wrong number for likes: %f%s\n", likes, unit)
 	}
 
@@ -194,7 +194,7 @@ func NewVideoScraper(id string) (v VideoScraper, err error) {
 		comments, unit, err = humanize.ParseSI(scraper.FixUnit(output.CommentsCount))
 		if err != nil {
 			return
-		} else if unit != "" {
+		} else if unit != "" && scraper.Debug {
 			log.Printf("WARNING: possibly wrong number for comments count: %f%s\n", comments, unit)
 		}
 	}
@@ -202,7 +202,7 @@ func NewVideoScraper(id string) (v VideoScraper, err error) {
 	channelSubscribers, unit, err := humanize.ParseSI(scraper.FixUnit(strings.TrimSuffix(output.ChannelSubscribers, " subscribers")))
 	if err != nil {
 		return
-	} else if unit != "" {
+	} else if unit != "" && scraper.Debug {
 		log.Printf("WARNING: possibly wrong number for channel subscribers count: %f%s\n", channelSubscribers, unit)
 	}
 

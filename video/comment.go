@@ -81,7 +81,7 @@ func (c *Comment) NextSubCommentPage() (comments []Comment, err error) {
 				if err != nil {
 					log.Println("WARNING:", err)
 					continue
-				} else if unit != "" {
+				} else if unit != "" && scraper.Debug {
 					log.Printf("WARNING: possibly wrong number for likes: %f%s\n", likes, unit)
 				}
 			}
@@ -154,7 +154,7 @@ func genericNextCommentsPage(input *scraper.ContinueInput, continueInputJson *[]
 			if err != nil {
 				log.Println("WARNING:", err)
 				continue
-			} else if unit != "" {
+			} else if unit != "" && scraper.Debug {
 				log.Printf("WARNING: possibly wrong number for likes: %f%s\n", likes, unit)
 			}
 		}

@@ -33,7 +33,7 @@ func ParseViews(rawViews string) (views float64, err error) {
 		views, unit, err = humanize.ParseSI(rawViews)
 		if err != nil {
 			return
-		} else if unit != "" {
+		} else if unit != "" && Debug {
 			log.Printf("WARNING: possibly wrong number for views: %f%s\n", views, unit)
 		}
 	}

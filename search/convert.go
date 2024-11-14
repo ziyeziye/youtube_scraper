@@ -82,7 +82,7 @@ func (rawChannel searchChannelRenderer) ToChannel() (channel SearchChannel, err 
 		if err != nil {
 			log.Println("meow:", rawChannel.RawSubscribers)
 			return
-		} else if unit != "" {
+		} else if unit != "" && scraper.Debug {
 			log.Printf("WARNING: possibly wrong number for channel subscribers count: %f%s\n", subscribers, unit)
 		}
 	}
