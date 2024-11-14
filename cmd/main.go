@@ -3,7 +3,6 @@ package main
 import (
 	"encoding/json"
 	scraper "github.com/0x090909/youtube_scraper"
-	video2 "github.com/0x090909/youtube_scraper/video"
 	"log"
 )
 
@@ -36,13 +35,13 @@ func main() {
 		}
 
 		for _, video := range videos {
-			info, err := video2.NewVideoWatchInfo(video.VideoID)
-			if err != nil {
-				log.Fatal("NewVideoWatchInfo ", err)
-				return
-			}
-			log.Println(info.VideoID, info.Title, info.ViewCount, info.Thumbnail, info.UploadDate)
-			//log.Println(video.VideoID, video.Title, video.Views)
+			//info, err := video2.NewVideoWatchInfo(video.VideoID)
+			//if err != nil {
+			//	log.Fatal("NewVideoWatchInfo ", err)
+			//	return
+			//}
+			//log.Fatal(info.VideoID, info.Title, info.ViewCount, info.Thumbnail, info.UploadDate)
+			log.Println(video.VideoID, video.Title, video.Views)
 		}
 	}
 }

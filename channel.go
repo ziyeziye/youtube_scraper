@@ -204,8 +204,8 @@ type channelInitialAccount struct {
 	RawVideosAmount string   `rjson:"header.pageHeaderRenderer.content.pageHeaderViewModel.metadata.contentMetadataViewModel.metadataRows[1].metadataParts[1].text.content"`
 	Badges          []string `rjson:"header.c4TabbedHeaderRenderer.badges[].metadataBadgeRenderer.tooltip"`
 
-	Avatars []YoutubeImage `rjson:"header.c4TabbedHeaderRenderer.avatar.thumbnails"`
-	Banners []YoutubeImage `rjson:"header.c4TabbedHeaderRenderer.banner.thumbnails"`
+	Avatars []YoutubeImage `rjson:"header.pageHeaderRenderer.content.pageHeaderViewModel.image.decoratedAvatarViewModel.avatar.avatarViewModel.image.sources"`
+	Banners []YoutubeImage `rjson:"header.pageHeaderRenderer.content.pageHeaderViewModel.banner.imageBannerViewModel.image.sources"`
 }
 
 // videoRenderer json type
