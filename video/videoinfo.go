@@ -50,7 +50,7 @@ func NewVideoWatchInfo(id string) (info VideoInfo, err error) {
 	}
 	scraper.DebugFileOutput([]byte(rawJson), "video_watch_initial.json")
 
-	rjson.Debug = true
+	//rjson.Debug = true
 	if err = rjson.Unmarshal([]byte(rawJson), &info); err != nil {
 		if errors.Is(err, rjson.ErrCantFindField) {
 			if scraper.Debug {
